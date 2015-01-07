@@ -1,0 +1,38 @@
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+
+public class Ughh extends JFrame{
+
+	Random r = new Random();
+	JLabel jl = new JLabel("aav");
+	ImageIcon i = new ImageIcon(getClass().getResource("/Screenshot (184).png"));
+	JLabel im = new JLabel(i);
+	List<Integer> list = new ArrayList<Integer>();
+	list.add(5);
+	
+	public Ughh() {
+		// TODO Auto-generated constructor stub
+	System.out.println(r.nextInt(251));
+	System.out.println(102 % 25);
+	
+	Container c = getContentPane();
+	c.setLayout(new FlowLayout());
+	c.add(jl);
+	c.add(im);
+	}
+	public static void main(String[] args) {
+	
+		Ughh u = new Ughh();
+		u.setSize(400,400);
+		u.setVisible(true);
+		u.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+}
+}
