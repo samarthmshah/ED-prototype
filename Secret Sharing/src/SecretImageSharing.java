@@ -1,6 +1,6 @@
 /**
  * @author Shah, Samarth
- * Dec 05, 2014
+ * March 10, 2015
  * SecretImageSharing.java	
  */
 
@@ -31,7 +31,7 @@ public class SecretImageSharing extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 
-	final String aboutMe = "Samarth Shah \n \n ICSI 660: Security and Privacy \n sshah4@albany.edu \n \nUniversity at Albany, NY";
+	final String ABOUT_ME = "Samarth Shah \n \n ICSI 697: Shamir Secret Sharing prototype \n sshah4@albany.edu \n \nUniversity at Albany, NY";
 
 	// Globals..
 	Random rand = new Random();
@@ -92,8 +92,7 @@ public class SecretImageSharing extends JFrame implements ActionListener {
 
 		menu.setBorder(BorderFactory.createTitledBorder("Options:"));
 		menu.setPreferredSize(new Dimension(150, 225));
-		originalImage.setBorder(BorderFactory
-				.createTitledBorder("Original Image:"));
+		originalImage.setBorder(BorderFactory.createTitledBorder("Original Image:"));
 		originalImage.setPreferredSize(new Dimension(150, 150));
 		share1Pan.setBorder(BorderFactory.createTitledBorder("Image Share 1:"));
 		share1Pan.setPreferredSize(new Dimension(150, 150));
@@ -105,29 +104,23 @@ public class SecretImageSharing extends JFrame implements ActionListener {
 		share4Pan.setPreferredSize(new Dimension(150, 150));
 		share5Pan.setBorder(BorderFactory.createTitledBorder("Image Share 5:"));
 		share5Pan.setPreferredSize(new Dimension(150, 150));
-		scale1Pan
-		.setBorder(BorderFactory.createTitledBorder("Scaled Share 1:"));
+		scale1Pan.setBorder(BorderFactory.createTitledBorder("Scaled Share 1:"));
 		scale1Pan.setPreferredSize(new Dimension(150, 150));
 		share1check.setPreferredSize(new Dimension(20, 20));
-		scale2Pan
-		.setBorder(BorderFactory.createTitledBorder("Scaled Share 2:"));
+		scale2Pan.setBorder(BorderFactory.createTitledBorder("Scaled Share 2:"));
 		scale2Pan.setPreferredSize(new Dimension(150, 150));
 		share2check.setPreferredSize(new Dimension(20, 20));
-		scale3Pan
-		.setBorder(BorderFactory.createTitledBorder("Scaled Share 3:"));
+		scale3Pan.setBorder(BorderFactory.createTitledBorder("Scaled Share 3:"));
 		scale3Pan.setPreferredSize(new Dimension(150, 150));
 		share3check.setPreferredSize(new Dimension(20, 20));
-		scale4Pan
-		.setBorder(BorderFactory.createTitledBorder("Scaled Share 4:"));
+		scale4Pan.setBorder(BorderFactory.createTitledBorder("Scaled Share 4:"));
 		scale4Pan.setPreferredSize(new Dimension(150, 150));
 		share4check.setPreferredSize(new Dimension(20, 20));
-		scale5Pan
-		.setBorder(BorderFactory.createTitledBorder("Scaled Share 5:"));
+		scale5Pan.setBorder(BorderFactory.createTitledBorder("Scaled Share 5:"));
 		scale5Pan.setPreferredSize(new Dimension(150, 150));
 		share5check.setPreferredSize(new Dimension(20, 20));
 
-		rePan.setBorder(BorderFactory
-				.createTitledBorder("Reconstructed Image:"));
+		rePan.setBorder(BorderFactory.createTitledBorder("Reconstructed Image:"));
 		rePan.setPreferredSize(new Dimension(150, 150));
 
 		c.setLayout(new FlowLayout());
@@ -172,16 +165,15 @@ public class SecretImageSharing extends JFrame implements ActionListener {
 		aboutDev.addActionListener(this);
 		quit.addActionListener(this);
 
-		setTitle("Security Project : Image Secret Sharing");
+		setTitle("ICSI 697: Report");
 		setSize(1200, 500);
 		setResizable(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
-	public String getSecretImage() {
+	private String getSecretImage() {
 		String name = null;
 		JFileChooser jfc = new JFileChooser();
-		// jfc.setFileFilter(ext);
 		int buttonClicked = jfc.showOpenDialog(null);
 
 		if (buttonClicked == JFileChooser.APPROVE_OPTION) {
@@ -197,7 +189,6 @@ public class SecretImageSharing extends JFrame implements ActionListener {
 				originalImage.setVisible(true);
 				originalImage.revalidate();
 				System.out.println("Image Picked: " +name);
-
 			} catch (Exception e) {
 				e.getMessage();
 			}
@@ -205,7 +196,7 @@ public class SecretImageSharing extends JFrame implements ActionListener {
 		return name;
 	}
 
-	public void marchThroughImage(BufferedImage image) {
+	private void marchThroughImage(final BufferedImage image) {
 		int w = image.getWidth();
 		int h = image.getHeight();
 
@@ -239,37 +230,19 @@ public class SecretImageSharing extends JFrame implements ActionListener {
 			WritableRaster rast = image_share1.getRaster();
 			rast.setDataElements(0, 0, w, h, new_pixelarr1);
 			ImageIO.write(image_share1,"jpg",new File("Z:/UALBANY/SECURITY/Project/Secret Sharing/bin/share1.jpg"));
-			ImageIO.write(
-					image_share1,
-					"jpg",
-					new File(
-							"Z:/UALBANY/SECURITY/Project/Secret Sharing/src/share1.jpg"));
+			ImageIO.write(image_share1, "jpg", new File("Z:/UALBANY/SECURITY/Project/Secret Sharing/src/share1.jpg"));
 
-			BufferedImage image_share2 = new BufferedImage(w, h,
-					BufferedImage.TYPE_INT_RGB);
+			BufferedImage image_share2 = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
 			WritableRaster rast2 = image_share2.getRaster();
 			rast2.setDataElements(0, 0, w, h, new_pixelarr2);
 			ImageIO.write(image_share2,"jpg",new File("Z:/UALBANY/SECURITY/Project/Secret Sharing/bin/share2.jpg"));
-			ImageIO.write(
-					image_share2,
-					"jpg",
-					new File(
-							"Z:/UALBANY/SECURITY/Project/Secret Sharing/src/share2.jpg"));
+			ImageIO.write( image_share2, "jpg", new File( "Z:/UALBANY/SECURITY/Project/Secret Sharing/src/share2.jpg"));
 
-			BufferedImage image_share3 = new BufferedImage(w, h,
-					BufferedImage.TYPE_INT_RGB);
+			BufferedImage image_share3 = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
 			WritableRaster rast3 = image_share3.getRaster();
 			rast3.setDataElements(0, 0, w, h, new_pixelarr3);
-			ImageIO.write(
-					image_share3,
-					"jpg",
-					new File(
-							"Z:/UALBANY/SECURITY/Project/Secret Sharing/bin/share3.jpg"));
-			ImageIO.write(
-					image_share3,
-					"jpg",
-					new File(
-							"Z:/UALBANY/SECURITY/Project/Secret Sharing/src/share3.jpg"));
+			ImageIO.write( image_share3, "jpg", new File("Z:/UALBANY/SECURITY/Project/Secret Sharing/bin/share3.jpg"));
+			ImageIO.write( image_share3, "jpg", new File("Z:/UALBANY/SECURITY/Project/Secret Sharing/src/share3.jpg"));
 
 			BufferedImage image_share4 = new BufferedImage(w, h,
 					BufferedImage.TYPE_INT_RGB);
@@ -658,6 +631,6 @@ public class SecretImageSharing extends JFrame implements ActionListener {
 	public static void main(String[] foo) {
 		SecretImageSharing f = new SecretImageSharing();
 		f.setVisible(true);
-		f.setTitle("Security Project by Samarth Shah");
+		f.setTitle("Independent Study by Samarth Shah");
 	}
 };
