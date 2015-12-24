@@ -1,7 +1,9 @@
 ## Image-Text-Encrytpion-prototype
 
-Original Paper link for Secret Image Sharing module - https://drive.google.com/open?id=0B0mmDenTdeFZaDhvQmVvcmwwZE0&authuser=0  
+My paper on this:
+Link-to-do.
 
-My Paper on it's Implementation (Module 1) - https://drive.google.com/open?id=0B0mmDenTdeFZZFdVcy1aN19RT2s&authuser=0  
+###Screenshots:
 
-Implementation details of Module 2: https://drive.google.com/file/d/0B0mmDenTdeFZMExJcHBaMDBRcUU/view?usp=sharing
+![alt text](all.png "Logo Title Text 1")
+![alt text](6.png "Logo Title Text 2")
