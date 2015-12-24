@@ -1,6 +1,6 @@
 /**
- * @author Shah, Samarth SONY
- * Dec 21, 2014
+ * @author Shah, Samarth
+ * April 21, 2015
  * TrialThree.java	
  */
 
@@ -14,12 +14,13 @@ import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
 import java.io.*;
 
-public class TrialThree {
-
+public class MyAES {
+	private final String CURRENT_DIRECTORY = System.getProperty("user.dir");
+	
 	SecretKeySpec key;
 	Cipher aesCipherE, aesCipherD;
 
-	public TrialThree() throws GeneralSecurityException {
+	public MyAES() throws GeneralSecurityException {
 		// TODO Auto-generated constructor stub
 		// create AES shared key cipher
 		
@@ -77,7 +78,7 @@ public class TrialThree {
 			BufferedImage cipherImage = new BufferedImage(w, h,BufferedImage.TYPE_INT_RGB);
 			WritableRaster rast = cipherImage.getRaster();
 			rast.setDataElements(0, 0, w, h, cipherPixelKeeperInt);
-			ImageIO.write(cipherImage,"jpg",new File(System.getProperty("user.dir")+"\\src\\Image1AESCipher.jpg"));
+			ImageIO.write(cipherImage,"jpg",new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Image1AESCipher.jpg"));
 		}
 		catch(Exception e){e.printStackTrace();}
 		
@@ -94,7 +95,7 @@ public class TrialThree {
 			BufferedImage plainImage = new BufferedImage(w, h,BufferedImage.TYPE_INT_RGB);
 			WritableRaster rast = plainImage.getRaster();
 			rast.setDataElements(0, 0, w, h, plainPixelKeeperInt);
-			ImageIO.write(plainImage,"jpg",new File(System.getProperty("user.dir")+"\\src\\Image1AESPlain.jpg"));
+			ImageIO.write(plainImage,"jpg",new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Image1AESPlain.jpg"));
 		}
 		catch(Exception e){e.printStackTrace();}
 	}
@@ -109,7 +110,7 @@ public class TrialThree {
 			BufferedImage cipherImage = new BufferedImage(w, h,BufferedImage.TYPE_INT_RGB);
 			WritableRaster rast = cipherImage.getRaster();
 			rast.setDataElements(0, 0, w, h, cipherPixelKeeperInt);
-			ImageIO.write(cipherImage,"jpg",new File(System.getProperty("user.dir")+"\\src\\Image2AESCipher.jpg"));
+			ImageIO.write(cipherImage,"jpg",new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Image2AESCipher.jpg"));
 		}
 		catch(Exception e){e.printStackTrace();}
 		
@@ -126,7 +127,7 @@ public class TrialThree {
 			BufferedImage plainImage = new BufferedImage(w, h,BufferedImage.TYPE_INT_RGB);
 			WritableRaster rast = plainImage.getRaster();
 			rast.setDataElements(0, 0, w, h, plainPixelKeeperInt);
-			ImageIO.write(plainImage,"jpg",new File(System.getProperty("user.dir")+"\\src\\Image2AESPlain.jpg"));
+			ImageIO.write(plainImage,"jpg",new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Image2AESPlain.jpg"));
 		}
 		catch(Exception e){e.printStackTrace();}
 	}

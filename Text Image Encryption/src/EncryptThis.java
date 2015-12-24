@@ -27,15 +27,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- * @author Shah, Samarth SONY
- * Dec 21, 2014
- * EncryptThis.java	
+ * @author Shah, Samarth April 21, 2015 EncryptThis.java
  */
 public class EncryptThis extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 
-	final String aboutMe = "Samarth Shah \n \n ICSI 660: Security and Privacy \n sshah4@albany.edu \n \n University at Albany, NY";
+	private final String ABOUT_ME = "Samarth Shah \n \n ICSI 697: AES DES RSA prototype \n sshah4@albany.edu \n \nUniversity at Albany, NY";
+	private final String CURRENT_DIRECTORY = System.getProperty("user.dir");
 	JButton loadImage1RSA = new JButton("E/D Image 1 RSA");
 	JButton loadImage2RSA = new JButton("E/D Image 2 RSA");
 	JButton loadText1RSA = new JButton("E/D Text 1 RSA");
@@ -200,30 +199,22 @@ public class EncryptThis extends JFrame implements ActionListener {
 					}
 				}
 
-				BufferedImage cipherImage = new BufferedImage(w, h,
-						BufferedImage.TYPE_INT_RGB);
+				BufferedImage cipherImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
 				WritableRaster rast = cipherImage.getRaster();
 				rast.setDataElements(0, 0, w, h, cipherPixelKeeper);
-				ImageIO.write(cipherImage, "jpg",
-						new File(System.getProperty("user.dir")
-								+ "\\src\\Image1RSACipher.jpg"));
+				ImageIO.write(cipherImage, "jpg", new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Image1RSACipher.jpg"));
 
-				BufferedImage plainImage = new BufferedImage(w, h,
-						BufferedImage.TYPE_INT_RGB);
+				BufferedImage plainImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
 				WritableRaster rast1 = plainImage.getRaster();
 				rast1.setDataElements(0, 0, w, h, plainPixelKeeper);
-				ImageIO.write(plainImage, "jpg",
-						new File(System.getProperty("user.dir")
-								+ "\\src\\Image1RSAPlain.jpg"));
+				ImageIO.write(plainImage, "jpg", new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Image1RSAPlain.jpg"));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			long toc = System.nanoTime();
 			long nano = toc - tic;
 			long ms = TimeUnit.NANOSECONDS.toMillis(nano);
-			System.out
-					.println("Time taken to encrypt/decrypt image 1 using RSA: "
-							+ ms + " ms");
+			System.out.println("Time taken to encrypt/decrypt image 1 using RSA: " + ms + " ms");
 
 		} else if (ae.getSource() == loadImage2RSA) {
 			EncryptThis et = new EncryptThis(512);
@@ -246,34 +237,64 @@ public class EncryptThis extends JFrame implements ActionListener {
 						plainPixelKeeper[j + (i * w)] = (et.decrypt(ciphertext)).intValue();
 					}
 				}
-				BufferedImage cipherImage = new BufferedImage(w, h,
-						BufferedImage.TYPE_INT_RGB);
+				BufferedImage cipherImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
 				WritableRaster rast = cipherImage.getRaster();
 				rast.setDataElements(0, 0, w, h, cipherPixelKeeper);
 				ImageIO.write(cipherImage, "jpg",
-						new File(System.getProperty("user.dir")
-								+ "\\src\\Image2RSACipher.jpg"));
+						new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Image2RSACipher.jpg"));
 
-				BufferedImage plainImage = new BufferedImage(w, h,
-						BufferedImage.TYPE_INT_RGB);
+				BufferedImage plainImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
 				WritableRaster rast1 = plainImage.getRaster();
 				rast1.setDataElements(0, 0, w, h, plainPixelKeeper);
 				ImageIO.write(plainImage, "jpg",
-						new File(System.getProperty("user.dir")
-								+ "\\src\\Image2RSAPlain.jpg"));
+						new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Image2RSAPlain.jpg"));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			long toc = System.nanoTime();
 			long nano = toc - tic;
 			long ms = TimeUnit.NANOSECONDS.toMillis(nano);
-			System.out.println("Time taken to encrypt/decrypt image 2 using RSA: "
-							+ ms + " ms");
+			System.out.println("Time taken to encrypt/decrypt image 2 using RSA: " + ms + " ms");
 
 		} else if (ae.getSource() == loadText1RSA) {
-			File fin = new File(System.getProperty("user.dir")+ "\\src\\Textfile1.txt");
-			File foutCipher = new File(System.getProperty("user.dir")+ "\\src\\Textfile1RSACipher.txt");
-			File fout = new File(System.getProperty("user.dir")+ "\\src\\Textfile1RSAPlain.txt");
+			File fin = new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Textfile1.txt");
+			File foutCipher = new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Textfile1RSACipher.txt");
+			File fout = new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Textfile1RSAPlain.txt");
+			long tic = System.nanoTime();
+			EncryptThis et = new EncryptThis(512);
+
+			try {
+				BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fin)));
+				PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(foutCipher, true)));
+				PrintWriter out1 = new PrintWriter(new BufferedWriter(new FileWriter(fout, true)));
+
+				String line = null;
+				while ((line = br.readLine()) != null) {
+					line.trim();
+					if (!line.equals("")) {
+						BigInteger plaintext = new BigInteger(line.getBytes());
+						BigInteger ciphertext = et.encrypt(plaintext);
+						out.println(new String(ciphertext.toByteArray()));
+						plaintext = et.decrypt(ciphertext);
+						out1.println(new String(plaintext.toByteArray()));
+					} else continue;
+				}
+				br.close();
+				out.close();
+				out1.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			long toc = System.nanoTime();
+			long nano = toc - tic;
+			long ms = TimeUnit.NANOSECONDS.toMillis(nano);
+			System.out.println("Time taken to encrypt/decrypt text 1 using RSA: " + ms + " ms");
+		}
+
+		else if (ae.getSource() == loadText2RSA) {
+			File fin = new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Textfile2.txt");
+			File foutCipher = new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Textfile2RSACipher.txt");
+			File fout = new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Textfile2RSAPlain.txt");
 			long tic = System.nanoTime();
 			EncryptThis et = new EncryptThis(512);
 
@@ -303,44 +324,7 @@ public class EncryptThis extends JFrame implements ActionListener {
 			long toc = System.nanoTime();
 			long nano = toc - tic;
 			long ms = TimeUnit.NANOSECONDS.toMillis(nano);
-			System.out.println("Time taken to encrypt/decrypt text 1 using RSA: "+ms+ " ms");
-		}
-
-		else if (ae.getSource() == loadText2RSA) {
-			File fin = new File(System.getProperty("user.dir")+ "\\src\\Textfile2.txt");
-			File foutCipher = new File(System.getProperty("user.dir")+ "\\src\\Textfile2RSACipher.txt");
-			File fout = new File(System.getProperty("user.dir")+ "\\src\\Textfile2RSAPlain.txt");
-			long tic = System.nanoTime();
-			EncryptThis et = new EncryptThis(512);
-
-			try {
-				BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fin)));
-				PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(foutCipher, true)));
-				PrintWriter out1 = new PrintWriter(new BufferedWriter(new FileWriter(fout, true)));
-
-				String line = null;
-				while ((line = br.readLine()) != null) {
-					line.trim();
-					if (!line.equals("")) {
-						BigInteger plaintext = new BigInteger(line.getBytes());
-						BigInteger ciphertext = et.encrypt(plaintext);
-						out.println(new String(ciphertext.toByteArray()));
-						plaintext = et.decrypt(ciphertext);
-						out1.println(new String(plaintext.toByteArray()));
-					} 
-					else continue;
-				}
-				br.close();
-				out.close();
-				out1.close();
-			} 
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-			long toc = System.nanoTime();
-			long nano = toc - tic;
-			long ms = TimeUnit.NANOSECONDS.toMillis(nano);
-			System.out.println("Time taken to encrypt/decrypt text 2 using RSA: "+ ms + " ms");
+			System.out.println("Time taken to encrypt/decrypt text 2 using RSA: " + ms + " ms");
 		}
 
 		else if (ae.getSource() == loadImage1DES) {
@@ -359,13 +343,13 @@ public class EncryptThis extends JFrame implements ActionListener {
 					}
 				}
 				SecretKey key = KeyGenerator.getInstance("DES").generateKey();
-				TrialTwo encrypter = new TrialTwo(key);
+				MyDES encrypter = new MyDES(key);
 				cipherPixelKeeper = encrypter.encrypt1(w, h, plainPixelKeeper);
 				encrypter.decrypt1(w, h, cipherPixelKeeper);
 				long toc = System.nanoTime();
 				long nano = toc - tic;
 				long ms = TimeUnit.NANOSECONDS.toMillis(nano);
-				System.out.println("Time taken to encrypt/decrypt image 1 using DES: "+ ms + " ms");
+				System.out.println("Time taken to encrypt/decrypt image 1 using DES: " + ms + " ms");
 			}
 
 			catch (Exception e) {
@@ -384,20 +368,17 @@ public class EncryptThis extends JFrame implements ActionListener {
 
 				for (int i = 0; i < h; i++) {
 					for (int j = 0; j < w; j++) {
-						plainPixelKeeper[j + (i * w)] = new Integer(
-								temporary.getRGB(j, i)).byteValue();
+						plainPixelKeeper[j + (i * w)] = new Integer(temporary.getRGB(j, i)).byteValue();
 					}
 				}
 				SecretKey key = KeyGenerator.getInstance("DES").generateKey();
-				TrialTwo encrypter = new TrialTwo(key);
+				MyDES encrypter = new MyDES(key);
 				cipherPixelKeeper = encrypter.encrypt2(w, h, plainPixelKeeper);
 				encrypter.decrypt2(w, h, cipherPixelKeeper);
 				long toc = System.nanoTime();
 				long nano = toc - tic;
 				long ms = TimeUnit.NANOSECONDS.toMillis(nano);
-				System.out
-						.println("Time taken to encrypt/decrypt image 2 using DES: "
-								+ ms + " ms");
+				System.out.println("Time taken to encrypt/decrypt image 2 using DES: " + ms + " ms");
 			}
 
 			catch (Exception e) {
@@ -409,22 +390,15 @@ public class EncryptThis extends JFrame implements ActionListener {
 			try {
 				long tic = System.nanoTime();
 				SecretKey key = KeyGenerator.getInstance("DES").generateKey();
-				TrialTwo encrypter = new TrialTwo(key);
-				File fin = new File(System.getProperty("user.dir")
-						+ "\\src\\Textfile1.txt");
-				File foutCipher = new File(System.getProperty("user.dir")
-						+ "\\src\\Textfile1DESCipher.txt");
-				File fout = new File(System.getProperty("user.dir")
-						+ "\\src\\Textfile1DESPlain.txt");
-				encrypter.encrypt(new FileInputStream(fin),
-						new FileOutputStream(foutCipher));
-				encrypter.decrypt(new FileInputStream(foutCipher),
-						new FileOutputStream(fout));
+				MyDES encrypter = new MyDES(key);
+				File fin = new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Textfile1.txt");
+				File foutCipher = new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Textfile1DESCipher.txt");
+				File fout = new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Textfile1DESPlain.txt");
+				encrypter.encrypt(new FileInputStream(fin), new FileOutputStream(foutCipher));
+				encrypter.decrypt(new FileInputStream(foutCipher), new FileOutputStream(fout));
 				long toc = System.nanoTime();
 				long ms = TimeUnit.NANOSECONDS.toMillis(toc - tic);
-				System.out
-						.println("Time taken to encrypt/decrypt text 1 using DES: "
-								+ ms + " ms");
+				System.out.println("Time taken to encrypt/decrypt text 1 using DES: " + ms + " ms");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -434,23 +408,16 @@ public class EncryptThis extends JFrame implements ActionListener {
 			try {
 				long tic = System.nanoTime();
 				SecretKey key2 = KeyGenerator.getInstance("DES").generateKey();
-				TrialTwo encrypter2 = new TrialTwo(key2);
-				File fin2 = new File(System.getProperty("user.dir")
-						+ "\\src\\Textfile2.txt");
-				File foutCipher2 = new File(System.getProperty("user.dir")
-						+ "\\src\\Textfile2DESCipher.txt");
-				File fout2 = new File(System.getProperty("user.dir")
-						+ "\\src\\Textfile2DESPlain.txt");
-				encrypter2.encrypt(new FileInputStream(fin2),
-						new FileOutputStream(foutCipher2));
-				encrypter2.decrypt(new FileInputStream(foutCipher2),
-						new FileOutputStream(fout2));
+				MyDES encrypter2 = new MyDES(key2);
+				File fin2 = new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Textfile2.txt");
+				File foutCipher2 = new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Textfile2DESCipher.txt");
+				File fout2 = new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Textfile2DESPlain.txt");
+				encrypter2.encrypt(new FileInputStream(fin2), new FileOutputStream(foutCipher2));
+				encrypter2.decrypt(new FileInputStream(foutCipher2), new FileOutputStream(fout2));
 				long toc = System.nanoTime();
 				long nano = toc - tic;
 				long ms = TimeUnit.NANOSECONDS.toMillis(nano);
-				System.out
-						.println("Time taken to encrypt/decrypt text 2 using DES: "
-								+ ms + " ms");
+				System.out.println("Time taken to encrypt/decrypt text 2 using DES: " + ms + " ms");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -471,14 +438,14 @@ public class EncryptThis extends JFrame implements ActionListener {
 						plainPixelKeeper[j + (i * w)] = new Integer(temporary.getRGB(j, i)).byteValue();
 					}
 				}
-				TrialThree aesencryption = new TrialThree();
-				cipherPixelKeeper = aesencryption.encrypt1(w, h,plainPixelKeeper);
+				MyAES aesencryption = new MyAES();
+				cipherPixelKeeper = aesencryption.encrypt1(w, h, plainPixelKeeper);
 				aesencryption.decrypt1(w, h, cipherPixelKeeper);
 
 				long toc = System.nanoTime();
 				long nano = toc - tic;
 				long ms = TimeUnit.NANOSECONDS.toMillis(nano);
-				System.out.println("Time taken to encrypt/decrypt image 1 using AES: "+ ms + " ms");
+				System.out.println("Time taken to encrypt/decrypt image 1 using AES: " + ms + " ms");
 			}
 
 			catch (Exception e) {
@@ -498,21 +465,17 @@ public class EncryptThis extends JFrame implements ActionListener {
 
 				for (int i = 0; i < h; i++) {
 					for (int j = 0; j < w; j++) {
-						plainPixelKeeper[j + (i * w)] = new Integer(
-								temporary.getRGB(j, i)).byteValue();
+						plainPixelKeeper[j + (i * w)] = new Integer(temporary.getRGB(j, i)).byteValue();
 					}
 				}
-				TrialThree aesencryption2 = new TrialThree();
-				cipherPixelKeeper = aesencryption2.encrypt2(w, h,
-						plainPixelKeeper);
+				MyAES aesencryption2 = new MyAES();
+				cipherPixelKeeper = aesencryption2.encrypt2(w, h, plainPixelKeeper);
 				aesencryption2.decrypt2(w, h, cipherPixelKeeper);
 
 				long toc = System.nanoTime();
 				long nano = toc - tic;
 				long ms = TimeUnit.NANOSECONDS.toMillis(nano);
-				System.out
-						.println("Time taken to encrypt/decrypt image 2 using AES: "
-								+ ms + " ms");
+				System.out.println("Time taken to encrypt/decrypt image 2 using AES: " + ms + " ms");
 			}
 
 			catch (Exception e) {
@@ -524,13 +487,10 @@ public class EncryptThis extends JFrame implements ActionListener {
 		else if (ae.getSource() == loadText1AES) {
 			long tic = System.nanoTime();
 			try {
-				TrialThree tt = new TrialThree();
-				File fin = new File(System.getProperty("user.dir")
-						+ "\\src\\Textfile1.txt");
-				File foutCipher = new File(System.getProperty("user.dir")
-						+ "\\src\\Textfile1AESCipher.txt");
-				File fout = new File(System.getProperty("user.dir")
-						+ "\\src\\Textfile1AESPlain.txt");
+				MyAES tt = new MyAES();
+				File fin = new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Textfile1.txt");
+				File foutCipher = new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Textfile1AESCipher.txt");
+				File fout = new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Textfile1AESPlain.txt");
 
 				tt.encrypt(fin, foutCipher);
 				tt.decrypt(foutCipher, fout);
@@ -539,21 +499,16 @@ public class EncryptThis extends JFrame implements ActionListener {
 			}
 			long toc = System.nanoTime();
 			long milli = TimeUnit.NANOSECONDS.toMillis(toc - tic);
-			System.out
-					.println("Time taken to encrypt/decrypt text 2 using AES: "
-							+ milli + " ms");
+			System.out.println("Time taken to encrypt/decrypt text 2 using AES: " + milli + " ms");
 		}
 
 		else if (ae.getSource() == loadText2AES) {
 			long tic = System.nanoTime();
 			try {
-				TrialThree tt2 = new TrialThree();
-				File fin2 = new File(System.getProperty("user.dir")
-						+ "\\src\\Textfile2.txt");
-				File foutCipher2 = new File(System.getProperty("user.dir")
-						+ "\\src\\Textfile2AESCipher.txt");
-				File fout2 = new File(System.getProperty("user.dir")
-						+ "\\src\\Textfile2AESPlain.txt");
+				MyAES tt2 = new MyAES();
+				File fin2 = new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Textfile2.txt");
+				File foutCipher2 = new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Textfile2AESCipher.txt");
+				File fout2 = new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Textfile2AESPlain.txt");
 
 				tt2.encrypt(fin2, foutCipher2);
 				tt2.decrypt(foutCipher2, fout2);
@@ -562,13 +517,11 @@ public class EncryptThis extends JFrame implements ActionListener {
 			}
 			long toc = System.nanoTime();
 			long milli = TimeUnit.NANOSECONDS.toMillis(toc - tic);
-			System.out
-					.println("Time taken to encrypt/decrypt text 2 using AES: "
-							+ milli + " ms");
+			System.out.println("Time taken to encrypt/decrypt text 2 using AES: " + milli + " ms");
 		}
 
 		else if (ae.getSource() == aboutDev) {
-			JOptionPane.showMessageDialog(null, aboutMe);
+			JOptionPane.showMessageDialog(null, ABOUT_ME);
 		} else if (ae.getSource() == quit) {
 			System.exit(0);
 		}
@@ -577,6 +530,6 @@ public class EncryptThis extends JFrame implements ActionListener {
 	public static void main(String[] args) {
 		EncryptThis ee = new EncryptThis();
 		ee.setVisible(true);
-		ee.setTitle("Assignment by Samarth Shah");
+		ee.setTitle("Independent Study by Samarth Shah");
 	}
 };

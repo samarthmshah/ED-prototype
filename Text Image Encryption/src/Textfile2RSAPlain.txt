@@ -127,3 +127,132 @@ Reference Books
  4. R4: Cryptography: Theory and Practice, By Douglas Robert Stinson,
     CRC Press, 2006 ISBN 1584885084, 9781584885085 
 ------------------------------------------------------------------------
+<http://www.albany.edu/>
+  ICSI-660/445 Theory and Practice of Security and Privacy
+    2014 Fall Term
+Announcements <#Announcements> �  Course Objectives <#Outline> � 
+Evaluation <#Evaluation> �  Lectures Notes <#Lectures> �  Term Paper
+<#Termpaper> �  Project <#Project> �  Assignments <#Assignments> � 
+Recommended Study Material <#Text> 
+------------------------------------------------------------------------
+Instructor: *Pradeep K. Atrey <http://www.cs.albany.edu/~patrey>*
+Office: *LI 096C*
+Class Meeting Time:*Mondays, Wednesdays 4:15 p.m. - 5:35 p.m.*
+Class Room:*BB0213*
+Office Hours:*Mondays, Wednesdays 2:00 p.m. - 4:00 p.m. * and *By
+appointment *
+Email:*first letter of first name plus last name at albany dot edu*
+------------------------------------------------------------------------
+    Announcements
+# *November 22, 2014: * Final project submission details have been posted,
+please see below.
+    Course Objectives and Learning Outcomes
+This course lays the foundation for graduate and senior undergraduate
+students to conduct research in the area of computer security and
+privacy. It covers the main topics in computer security, such as
+encryption methods, public key cryptography, hash function and signature
+schemes, key exchange protocols, secret sharing, homomorphism,
+authentication and access control models, multimedia security and
+homeland security. Privacy preserving techniques such as data
+aggregation, perturbation, k-anonymity and l-diversity, and ethical
+issues are also discussed. Upon completion, the students should be able
+to understand the theoretical and practical aspects of security and
+privacy, and open up to the current research challenges in this area.
+    Evaluation Components
+For ICSI 660 Students:
+  * Two term tests (20%)
+ * Term paper (10%)
+  * Project (30%)
+  * Final exam (40%) 
+For ICSI 445 Students:
+  * Two term tests (20%)
+  * Term paper (10%)
+  * Two assignments (30%)
+  * Final exam (40%) 
+    Lecture Notes
+Week # (Dates) 	Topics 	Reading List
+Sep 3 	Introduction to the Course 	
+Sep 8 & 10 	Overview & Classical cryptography 	R1.1 (except R1.1.3,
+R1.1.4, R1.1.6) & T.2, Univ. of Rhodes - Notes
+<http://www.cs.uri.edu/cryptography/index2.htm>
+Sep 15 & 17 	Block ciphers, DES and AES, and Modes of operation 	T.3,
+T.5 (except 5.1, 5.6), T.6 (except 6.7) Univ. of Rhodes - Notes
+<http://www.cs.uri.edu/cryptography/index2.htm>
+Sep 22 	Basic concepts in Number Theory and Modular Arithmetic 	T.(4.1,
+4.2, & 4.3) & T.(8.1, 8.2)
+Sep 29, Oct 1 & 6 	Public Key Cryptography 1 (RSA and D-H Key Exchange)
+& Public Key Cryptography 2 (Message Authentication, Hash Functions and
+DSS) 	T.9 (including Appendix 9A) & T.10.1; T.11 (except 11.6), T.12
+(except 12.6, 12.7, 12.8), T.13 (except 13.2, 13.3)
+Oct 8 	Term test #1 	--
+Oct 13, 15 & 20 	Shamir's Secret Sharing and Homomorphism - Secure
+cloud-based data processing 	Secret Sharing (Web source)
+<http://szabo.best.vwh.net/secret.html>, Board scraps <SS_notes.zip>
+Oct 22 	Term paper presentations 	-
+Oct 27 & 29 	Multimedia Security 	Web link
+<http://www.cs.bham.ac.uk/~mdr/teaching/modules03/security/students/SS5/Steganography.htm>
+Nov 3 & 5 	Privacy Preserving Techniques - Overview & Statistical
+Disclosure Control & No class on Nov. 5 	Statistical Methods for Privacy
+Protection (Sec 3.1-3.4) <Statistical_Methods_for_Privacy_Protection.ize>	
+Nov 10 	Term test #2 	-
+Nov 12 	Review of Term Test #2 and Statistical Disclosure Control
+(Cont...) 	-
+Nov 17 	Privacy Preserving Data Mining 	k-Anonymity
+<http://epic.org/privacy/reidentification/Sweeney_Article.pdf>,
+l-Diversity <ldiversity_paper.ize>, t-Closeness
+<http://www.cs.purdue.edu/homes/ninghui/papers/t_closeness_icde07.pdf>
+Nov 19 	Privacy in Video Surveillance 	Paper1 <2012_MTAP_W3Privacy.ize>,
+Paper2 <2013_IJTMCC_PrivacyPub.ize>
+Nov 20 (makeup class for Nov 5) 	Privacy in Social Networks 	Paper
+<Secure_OSN.ize>
+Nov 25 & Dec 1 	Multimedia Surveillance for Homeland Security 	--
+Dec 3 	Course Review and Tips on Final Exam 	--
+Dec 8, 2:40-4:00 p.m. (LI 98) & 4:15-5:35 p.m. (BB 213) 	Project
+presentations 	--
+    Term Paper
+  * Details can be found here
+    <http://www.cs.albany.edu/~patrey/ICSI660-445/termpaper.htm>.
+  * List of approved term papers can be found here
+    <http://www.cs.albany.edu/~patrey/ICSI660-445/termpaperlist.htm>. 
+    Project (For ICSI-660 only)
+  * Project proposal
+    <http://www.cs.albany.edu/~patrey/ICSI660-445/project.htm#Proposal>:
+    due on September 22, 2014, 11:59 p.m. The topics of potential
+    projects can be found here
+    <http://www.cs.albany.edu/~patrey/ICSI660-445/projecttopics.htm>.
+  * Sample final reports can be found here: [Implementation
+    <http://www.cs.albany.edu/~patrey/ICSI660-445/project/Implementation_sample_report.pdf>]
+    and [Survey
+    <http://www.cs.albany.edu/~patrey/ICSI660-445/project/Survey_sample_report.pdf>]
+  * List of approved projects can be found here
+    <http://www.cs.albany.edu/~patrey/ICSI660-445/projectlist.htm>.
+  * Final project submission <project.htm#Final> due on December 8,
+    2014, 12:00 noon.
+  * Project demonstrations will be held on December 8, 2014 in LI 98 and
+    BB 213. Demo schedule can be found here <projectlist.htm>. 
+    Assignments (For ICSI-445 only)
+  * Assignment #1 (Symmetric and asymmetric encryption)
+    <http://www.cs.albany.edu/~patrey/ICSI660-445/assignments/ass1/ICSI445ass1.pdf>:
+    due on October 3, 2014, 11:59 p.m.
+  * Assignment #2 (Secret sharing)
+    <http://www.cs.albany.edu/~patrey/ICSI660-445/assignments/ass2/ICSI445ass2.pdf>:
+    due on November 10, 2014, 11:59 p.m. 
+    Recommended Study Material
+*Text Book *
+Cryptography and Network Security: Principles and Practice, 5/E, by
+William Stallings, Prentice Hall, ISBN-10: 0136097049, ISBN-13:
+9780136097044
+Besides the information contained in the textbook, the appropriate
+material and examples will also be taken from other sources. Students
+are responsible for all material covered in the class.
+Reference Books
+ 1. R1: Computer Security: Principles and Practice. William Stallings
+    and Lawrie Brown. 2nd edition, Pearson/Prentice Hall ISBN-10:
+    0136004245, ISBN-13: 9780136004240
+ 2. R2: Security in Computing, By Charles P. Pfleeger, Shari Lawrence
+    Pfleeger, Prentice Hall PTR, 2003 ISBN 0130355488, 9780130355485
+ 3. R3: Introduction to Computer Security, By Matt Bishop,
+    Addison-Wesley, Published 2004 ISBN 032124744
+ 4. R4: Cryptography: Theory and Practice, By Douglas Robert Stinson,
+    CRC Press, 2006 ISBN 1584885084, 9781584885085 
+------------------------------------------------------------------------

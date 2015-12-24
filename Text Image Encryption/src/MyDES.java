@@ -4,9 +4,8 @@
 
 /**
  * @author Shah, Samarth SONY
- * Dec 21, 2014
+ * April 21, 2015
  * TrialTwo.java	
- * Trying DES over here, MYSELF!
  */
 
 import java.awt.image.BufferedImage;
@@ -26,12 +25,13 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.imageio.ImageIO;
 
-class TrialTwo {
+public class MyDES {
+	private final String CURRENT_DIRECTORY = System.getProperty("user.dir");
 	byte[] buf = new byte[1024];
 	Cipher ecipher;
 	Cipher dcipher;
 
-	TrialTwo(SecretKey key) throws Exception {
+	public MyDES(SecretKey key) throws Exception {
 
 		//we need an IV since we are using a CBC mode of 8 bytes.
 		byte[] iv = new byte[] { (byte) 0x8E, 0x12, 0x39, (byte) 0x9C, 0x07,0x72, 0x6F, 0x5A };
@@ -67,7 +67,7 @@ class TrialTwo {
 			BufferedImage cipherImage = new BufferedImage(w, h,BufferedImage.TYPE_INT_RGB);
 			WritableRaster rast = cipherImage.getRaster();
 			rast.setDataElements(0, 0, w, h, cipherPixelKeeperInt);
-			ImageIO.write(cipherImage,"jpg",new File(System.getProperty("user.dir")+"\\src\\Image1DESCipher.jpg"));
+			ImageIO.write(cipherImage,"jpg",new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Image1DESCipher.jpg"));
 		}
 		catch(Exception e){e.printStackTrace();}
 		
@@ -84,7 +84,7 @@ class TrialTwo {
 			BufferedImage plainImage = new BufferedImage(w, h,BufferedImage.TYPE_INT_RGB);
 			WritableRaster rast = plainImage.getRaster();
 			rast.setDataElements(0, 0, w, h, plainPixelKeeperInt);
-			ImageIO.write(plainImage,"jpg",new File(System.getProperty("user.dir")+"\\src\\Image1DESPlain.jpg"));
+			ImageIO.write(plainImage,"jpg",new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Image1DESPlain.jpg"));
 		}
 		catch(Exception e){e.printStackTrace();}
 	}
@@ -99,7 +99,7 @@ class TrialTwo {
 			BufferedImage cipherImage = new BufferedImage(w, h,BufferedImage.TYPE_INT_RGB);
 			WritableRaster rast = cipherImage.getRaster();
 			rast.setDataElements(0, 0, w, h, cipherPixelKeeperInt);
-			ImageIO.write(cipherImage,"jpg",new File(System.getProperty("user.dir")+"\\src\\Image2DESCipher.jpg"));
+			ImageIO.write(cipherImage,"jpg",new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Image2DESCipher.jpg"));
 		}
 		catch(Exception e){e.printStackTrace();}
 		
@@ -116,7 +116,7 @@ class TrialTwo {
 			BufferedImage plainImage = new BufferedImage(w, h,BufferedImage.TYPE_INT_RGB);
 			WritableRaster rast = plainImage.getRaster();
 			rast.setDataElements(0, 0, w, h, plainPixelKeeperInt);
-			ImageIO.write(plainImage,"jpg",new File(System.getProperty("user.dir")+"\\src\\Image2DESPlain.jpg"));
+			ImageIO.write(plainImage,"jpg",new File(CURRENT_DIRECTORY + File.separator + "src" + File.separator + "Image2DESPlain.jpg"));
 		}
 		catch(Exception e){e.printStackTrace();}
 	}
@@ -143,7 +143,7 @@ class TrialTwo {
 
 	public static void main(String[] argv) throws Exception {
 		SecretKey key = KeyGenerator.getInstance("DES").generateKey();
-		TrialTwo encrypter = new TrialTwo(key);
+		MyDES encrypter = new MyDES(key);
 		File fin = new File(System.getProperty("user.dir")+"\\src\\Textfile2.txt");
 		File foutCipher = new File(System.getProperty("user.dir")+"\\src\\Textfile2DESCipher.txt");
 		File fout = new File(System.getProperty("user.dir")+"\\src\\Textfile2DESPlain.txt");

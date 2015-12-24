@@ -1,1 +1,1 @@
-This is extra work for ICSI-660/445 Theory and Practice of Security and Privacy.
+This is a small example file for my Independent Study report ICSI 697.
